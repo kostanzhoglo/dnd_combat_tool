@@ -6,6 +6,7 @@ from dotenv import load_dotenv
 load_dotenv()
 OWNER = os.getenv('OWNER')
 DB_PASSWORD = os.getenv('DB_PASSWORD')
+HEROKU_URI = os.getenv('HEROKU_URI')
 
 app = Flask(__name__)
 
@@ -17,7 +18,7 @@ if ENV == 'dev':
     app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://' + str(OWNER) + ':' + str(DB_PASSWORD) + '@localhost/dnd'
 else:
     app.debug = False
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://plwquqdmkziorw:b1bc4f04549868c5495efde4b62dbfa1c13f8eded2f218eab3f9078bd80e8089@ec2-54-91-178-234.compute-1.amazonaws.com:5432/d7tk3fs4asvj52'
+    app.config['SQLALCHEMY_DATABASE_URI'] = str(HEROKU_URI)
 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
