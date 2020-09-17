@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/style.css">
+    <title>D&D Combats Made Easier!</title>
+</head>
+<body>
+    <div class="container">
+        <!-- <img src="" alt=""> -->
+        {% if message %}
+        <p class="message">{{ message | safe }}</p>
+        {% endif %}
+        <form action="/submit" method="POST">
+            <div class="form-group">
+                <h3>Monster</h3>
+                <input 
+                    type="text"
+                    name="monster"
+                    placeholder="Monster Name (ex. Orc-Red, Orc-1)"
+                />  
+            </div>
+            <div class="form-group">
+                <h3>AC</h3>
+                <input 
+                    type="text"
+                    name="ac"
+                />
+            </div>
+            <div class="form-group">
+                <h3>Max HP</h3>
+                <input 
+                    type="text"
+                    name="max HP"
+                />
+            </div>
+            <div class="form-group">
+                <h3>Current HP</h3>
+                <input 
+                    type="text"
+                    name="current HP"
+                />
+            </div>
+            <div class="form-group">
+                <h3>Notes</h3>
+                <input 
+                    type="text"
+                    name="notes"
+                />
+            </div>
+            <input type="submit" value="Submit" class="btn" onclick="setTimeout(function () { window.location.reload(); }, 3)">
+            <div></div>
+            <span></span>
+            <div class="table">
+                <table class="table">
+                    <tr class="t-row">
+                        <th class="tc">Monster</th>
+                        <th class="tc">AC</th>
+                        <th class="tc">Max HP</th>
+                        <th class="tc">Damage</th>
+                        <th class="tc">Current HP</th>
+                        <th class="tc">Notes</th>
+                    </tr>
+                    {% for item in data %}
+                    <tr>
+                        <td>{{item.monster}}</td>
+                        <td>{{item.ac}}</td>
+                        <td>{{item.max_hp}}</td>
+                        <td class="damage"></td>
+                        <td>{{item.current_hp}}</td>
+                        <td>{{item.notes}}</td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
